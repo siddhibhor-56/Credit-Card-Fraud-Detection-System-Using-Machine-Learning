@@ -1,0 +1,8 @@
+.col-md-12.form-submit{
+  margin: 0;
+  position: center;
+  top: 50%;
+  -ms-transform: translateX(-50%);
+  transform: translateY(-50%);
+
+}

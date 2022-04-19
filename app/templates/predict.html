@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
+    <title>CredTech-Prediction</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="../static/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="../static/assets/css/tooplate-main.css">
+    <link rel="stylesheet" href="../static/assets/css/owl.css">
+    <link rel="stylesheet" href="../static/assets/css/flex-slider.css">
+
+    <link rel="stylesheet" href="../static/style.css">
+
+    <style>
+        .bd-placeholder-img {
+          font-size: 1.125rem;
+          text-anchor: middle;
+        }
+  
+        @media (min-width: 768px) {
+          .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+          }
+        }
+      </style>
+
+
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+      <div class="container">
+        <a class="navbar-brand" href="#"><img src="../static/assets/images/CredTech-Logo.png" height="50cm" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            {% if user and user.is_admin() %}
+            <li class="nav-item">
+              <a class="nav-link" href="admin">Administration</a>
+              
+            </li>
+            {%endif%}
+            <li class="nav-item">
+              <a class="nav-link" href="view_data">View Data</a>
+              
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="analyze">File Report</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="predict">Prediction</a>
+              
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="logout">Logout</a>
+              
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+     <!-- Featured Starts Here -->
+     <div class="featured-items" id="work">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="section-heading">
+            <div class="line-dec"></div>
+            <h3>Credit Fraud Prediction Form</h3>
+            </div>
+
+            <form id="form-shower">
+              <select id="myselect">
+              <option value="" selected="selected"></option>
+              <option value="form_name1">Multi Row Prediction</option>
+              <option value="form_name2">Single Row Prediction </option>
+              </select>
+            </form>
+
+            </div>
+            </div>
+            
+            <br>
+            <br>
+
+            <div class="row">
+
+            <form action='upload_test' name="form_name1" id="form_name1" style="display:none" class="form-signin" method=post enctype=multipart/form-data>
+              <img class="mb-4" src="/static/icon.jpeg" alt="" width="72">
+              <h1 class="h3 mb-3 font-weight-normal">Upload the data to test</h1>
+              <input type="file" name="file" class="form-control-file" id="inputfile" required>
+              <br/>
+              <button class="btn btn-lg btn-primary btn-block" type="submit">Upload</button>
+            </form>
+
+            <script src="//code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+            <script src="//stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+            <script type="text/javascript">
+              $('#inputfile').bind('change', function() {
+                  let fileSize = this.files[0].size/1024/1024; // this gives in MB
+                  if (fileSize > 5) {
+                    $("#inputfile").val(null);
+                    alert('file is too big. csv file more than 5MB are not allowed')
+                    return
+                  }
+              });
+            </script>
+            
+            <form name="form_name2" id="form_name2" style="display:none;" action="/result" method="POST">
+              <div class="row">
+              <div class="col-md-6">
+                <label for="Time">Time</label>
+                <input type="text" id="Time" name="Time" value="144839.0">
+                <br>
+
+                <label for="V1">V1</label>
+                <input type="text" id="V1" name="V1" value="-6.42330645645221">
+                <br>
+
+
+                <label for="V2">V2</label>
+                <input type="text" id="V2" name="V2" value="1.65851450876035">
+                <br>
+
+
+                <label for="V3">V3</label>
+                <input type="text" id="V3" name="V3" value="-5.86643956435658">
+                <br>
+
+
+                <label for="V4">V4</label>
+                <input type="text" id="V4" name="V4" value="2.05206440242466">
+                <br>
+
+
+                <label for="V5">V5</label>
+                <input type="text" id="V5" name="V5" value="-0.615816842763718">
+                <br>
+
+
+                <label for="V6">V6</label>
+                <input type="text" id="V6" name="V6" value="-3.37226571107575">
+                <br>
+
+
+                <label for="V7">V7</label>
+                <input type="text" id="V7" name="V7" value="-5.03655575494585">
+                <br>
+
+
+                <label for="V8">V8</label>
+                <input type="text" id="V8" name="V8" value="2.64310601464633">
+                <br>
+
+
+                <label for="V9">V9</label>
+                <input type="text" id="V9" name="V9" value="-2.27463004673333">
+                <br>
+
+
+                <label for="V10">V10</label>
+                <input type="text" id="V10" name="V10" value="-7.04922935969585">
+                <br>
+
+              
+
+            
+                <label for="V11">V11</label>
+                <input type="text" id="V11" name="V11" value="3.9168025570096">
+                <br>
+
+
+
+                <label for="V12">V12</label>
+                <input type="text" id="V12" name="V12" value="-4.48127959922503">
+                <br>
+
+
+
+                <label for="V13">V13</label>
+                <input type="text" id="V13" name="V13" value="-1.02747932747206">
+                <br>
+
+
+
+                <label for="V14">V14</label>
+                <input type="text" id="V14" name="V14" value="-7.11387278226069">
+                <br>
+
+              </div>
+              <div class="col-md-6">
+                <label for="V15">V15</label>
+                <input type="text" id="V15" name="V15" value="-0.852775229881616">
+                <br>
+
+
+
+                <label for="V16">V16</label>
+                <input type="text" id="V16" name="V16" value="-3.83955997447082">
+                <br>
+
+
+
+                <label for="V17">V17</label>
+                <input type="text" id="V17" name="V17" value="-5.05600998750159">
+                <br>
+
+
+
+                <label for="V18">V18</label>
+                <input type="text" id="V18" name="V18" value="-1.34449753083319">
+                <br>
+
+
+
+                <label for="V19">V19</label>
+                <input type="text" id="V19" name="V19" value="1.14847293881065">
+                <br>
+
+
+
+                <label for="V20">V20</label>
+                <input type="text" id="V20" name="V20" value="-0.713515810779757">
+                <br>
+
+
+
+                <label for="V21">V21</label>
+                <input type="text" id="V21" name="V21" value="0.641210915884323">
+                <br>
+
+
+
+                <label for="V22">V22</label>
+                <input type="text" id="V22" name="V22" value="-0.256678382381229">
+                <br>
+
+
+
+                <label for="V23">V23</label>
+                <input type="text" id="V23" name="V23" value="-2.33723276414845">
+                <br>
+
+
+
+                <label for="V24">V24</label>
+                <input type="text" id="V24" name="V24" value="-0.158277898470348">
+                <br>
+
+
+
+                <label for="V25">V25</label>
+                <input type="text" id="V25" name="V25" value="1.19879744465828">
+                <br>
+
+
+
+                <label for="V26">V26</label>
+                <input type="text" id="V26" name="V26" value="-0.261257806694643">
+                <br>
+
+
+
+                <label for="V27">V27</label>
+                <input type="text" id="V27" name="V27" value="0.78012548401824">
+                <br>
+
+
+
+                <label for="V28">V28</label>
+                <input type="text" id="V28" name="V28" value="-0.731800816194097">
+                <br>
+
+
+
+                <label for="Amount">Amount</label>
+                <input type="text" id="Amount" name="Amount" value="0">
+                <br>
+              </div>
+            </div>
+                <input type="submit" value="Submit">
+            </form>
+
+
+
+            <br>
+
+            <div class="col-md-6">
+              {% if tables or prediction %}
+              
+                <div class="section-heading">
+                  <div class="line-dec"></div>
+                  <h1>Prediction Results</h1>
+                </div>
+                {% if prediction %}
+                  <h1> {{ prediction }}</h1>
+                
+                {% else %}
+                  {% for table in tables %}
+                    <h2>{{titles[loop.index]}}</h2>
+                    <br>
+                    {{ table|safe }}
+                  {% endfor %}
+                {% endif %}
+              {% endif%}
+            </div>
+
+          </div>
+
+<script>
+  $("#myselect").on("change", function() {
+      $("#" + $(this).val()).show().siblings().hide();
+  })
+  </script>
+
+
+
+          </div>
+        </div>
+       <!-- </div>
+      </div>  -->
+  
+      
+      <!-- Footer Starts Here -->
+      <div class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="logo">
+                <img src="../static/assets/images/CredTech-Logo.png" height="50cm" alt="">
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="footer-menu">
+                <ul>
+                  <li><a href="index">Home</a></li>
+                  <!-- <li><a href="#">Help</a></li>
+                  <li><a href="#">Privacy Policy</a></li> -->
+                  <li><a href="#work">How It Works ?</a></li>
+                  <li><a href="mailto:lokarepurva121@gmail.com">Help</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="social-icons">
+                <ul>
+                  <li><a href="https://www.linkedin.com/in/siddhi-bhor-38aa7b1a5"><i class="fa fa-linkedin"></i></a></li>
+                  <li><a href="https://github.com/siddhibhor-56"><i class="fa fa-github"></i></a></li>
+                  <li><a href="mailto:lokarepurva121@gmail.com"><i class="fa fa-google"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer Ends Here -->
+  
+  
+  
+  
+      <!-- Bootstrap core JavaScript -->
+      <script src="../static/vendor/jquery/jquery.min.js"></script>
+      <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+  
+      <!-- Additional Scripts -->
+      <script src="../static/assets/js/custom.js"></script>
+      <script src="../static/assets/js/owl.js"></script>
+  
+  
+      <script language = "text/Javascript"> 
+        cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+        function clearField(t){                   //declaring the array outside of the
+        if(! cleared[t.id]){                      // function makes it static and global
+            cleared[t.id] = 1;  // you could use true and false, but that's more typing
+            t.value='';         // with more chance of typos
+            t.style.color='#fff';
+            }
+        }
+      </script>
+  
+  
+    </body>
+  
+  </html>
+  

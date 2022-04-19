@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Data Analysis</title>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.css">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="../static/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="../static/assets/css/tooplate-main.css">
+    <link rel="stylesheet" href="../static/assets/css/owl.css">
+    <link rel="stylesheet" href="../static/assets/css/flex-slider.css"> 
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+      <a class="navbar-brand" href="#"><img src="../static/assets/images/CredTech-Logo.png" height="50cm" alt=""></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          {% if user and user.is_admin() %}
+          <li class="nav-item">
+            <a class="nav-link" href="admin">Administration</a>
+            
+          </li>
+          {%endif%}
+          <li class="nav-item">
+            <a class="nav-link" href="view_data">View Data</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="analyze">File Report</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="predict">Prediction</a>
+            
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="logout">Logout</a>
+            
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="section-heading">
+                <div class="line-dec"></div>
+                <h1>Data Summary</h1>
+              </div>
+            <div class="chart1" id="tablechart">
+                <script>
+                    var graphs = {{plot1 | safe}};
+                    Plotly.plot('tablechart',graphs,{});
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="section-heading">
+                <div class="line-dec"></div>
+                <h1>Target Class Distribution</h1>
+            </div>
+            <div class="chart2" id="bargraph">
+                <script>
+                    var graphs = {{plot2 | safe}};
+                    Plotly.plot('bargraph',graphs,{});
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="section-heading">
+                <div class="line-dec"></div>
+                <h1>Correlation HeatMap</h1>
+            </div>
+            <div class="chart3" id="heatmap">
+                <script>
+                    var graphs = {{plot3 | safe}};
+                    Plotly.plot('heatmap',graphs,{});
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="section-heading">
+                <div class="line-dec"></div>
+                <h1>Min_Correlated_Feature v/s Max_Correlated_Feature</h1>
+            </div>
+            
+            <div class="chart4" id="scatter">
+                <script>
+                    var graphs = {{plot4 | safe}};
+                    Plotly.plot('scatter',graphs,{});
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="section-heading">
+                <div class="line-dec"></div>
+                <h1>Boxplot of Amount wrt Class</h1>
+            </div>
+            <div class="chart5" id="boxplot">
+                <script>
+                    var graphs = {{plot5 | safe}};
+                    Plotly.plot('boxplot',graphs,{});
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer Starts Here -->
+<div class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="logo">
+            <img src="../static/assets/images/CredTech-Logo.png" height="50cm"alt="">
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="footer-menu">
+            <ul>
+              <li><a href="index">Home</a></li>
+              <!-- <li><a href="#">Help</a></li>
+              <li><a href="#">Privacy Policy</a></li> -->
+              <li><a href="index#work">How It Works ?</a></li>
+              <li><a href="mailto:lokarepurva121@gmail.com">Help</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="social-icons">
+            <ul>
+              <li><a href="https://www.linkedin.com/in/siddhi-bhor-38aa7b1a5"><i class="fa fa-linkedin"></i></a></li>
+              <li><a href="https://github.com/siddhibhor-56"><i class="fa fa-github"></i></a></li>
+              <li><a href="mailto:lokarepurva121@gmail.com"><i class="fa fa-google"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer Ends Here -->
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../static/vendor/jquery/jquery.min.js"></script>
+  <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.js"></script>
+
+
+  <!-- Additional Scripts -->
+  <script src="../static/assets/js/custom.js"></script>
+  <script src="../static/assets/js/owl.js"></script>
+  <script src="../static/assets/js/isotope.js"></script>
+  <script src="../static/assets/js/flex-slider.js"></script>
+</body>
+
+</html>

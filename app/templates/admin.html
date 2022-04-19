@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+
+    <title>CredTech-Dashboard-Administration</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="../static/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="../static/assets/css/tooplate-main.css">
+    <link rel="stylesheet" href="../static/assets/css/owl.css">
+    <link rel="stylesheet" href="../static/assets/css/flex-slider.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <link rel=stylesheet type=text/css href="../static/style.css">
+    
+<!--
+Tooplate 2114 Pixie
+https://www.tooplate.com/view/2114-pixie
+-->
+  </head>
+
+  <body>
+    
+    <!-- Pre Header 
+    <div id="pre-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <span>Suspendisse laoreet magna vel diam lobortis imperdiet</span>
+          </div>
+        </div>
+      </div>
+    </div>-->
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+      <div class="container">
+        <a class="navbar-brand" href="#"><img src="../static/assets/images/CredTech-Logo.png" height="50cm" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            {% if user and user.is_admin() %}
+            <li class="nav-item active">
+              <a class="nav-link" href="admin">Administration</a>
+            </li>
+            {% endif %}
+
+            <li class="nav-item">
+              <a class="nav-link" href="view_data">View Data</a>
+              
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="analyze">File Report</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="predict">Prediction</a>
+              
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="logout">Logout</a>
+              
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+   
+
+  
+      <!-- Featured Starts Here -->
+      <div class="featured-items" id="work">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="section-heading">
+                <div class="line-dec"></div>
+                <h1>Upload Dataset to Train</h1>
+              </div>
+            
+              <form class="form-signin" action = "train" method = "POST" enctype = "multipart/form-data">
+                <img class="mb-4" src="../static/icon.jpeg" alt="" width="144">
+                <input type = "file" name = "file" class="form-control-file" id="inputfile" required/>
+                <br/>
+                <input class="btn btn-lg btn-primary btn-block" value="Upload and Train "type="submit" onclick="$('#loading').show();">
+              </form> 
+              <div id="loading" style="display:none;"><img src="../static/loading.gif" alt="" />Training!</div>       
+            </div>
+
+            <div class="col-md-6">
+              <!-- <h1>Credit card Transaction Prediction</h1> -->
+              {% if tables %}
+                <div class="section-heading">
+                  <div class="line-dec"></div>
+                  <h1>Training Results</h1>
+                </div>
+                {% for table in tables %}
+                <br>
+                  {{ table|safe }}
+                {% endfor %}
+              {% endif%}
+            </div>
+
+
+          </div>
+              <!-- <div class="row">
+                <div class ="msg">{{ msg }}</div>
+              </div> -->
+
+
+
+
+
+            </div>
+          </div>
+      <!-- Featred Ends Here -->
+  
+  
+      <!-- Subscribe Form Starts Here -->
+     <!-- <div class="subscribe-form">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="section-heading">
+                <div class="line-dec"></div>
+                <h1>Subscribe on PIXIE now!</h1>
+              </div>
+            </div>
+            <div class="col-md-8 offset-md-2">
+              <div class="main-content">
+                <p>Integer vel turpis ultricies, lacinia ligula id, lobortis augue. Vivamus porttitor dui id dictum efficitur. Phasellus vel interdum elit.</p>
+                <div class="container">
+                  <form id="subscribe" action="" method="get">
+                    <div class="row">
+                      <div class="col-md-7">
+                        <fieldset>
+                          <input name="email" type="text" class="form-control" id="email" 
+                          onfocus="if(this.value == 'Your Email...') { this.value = ''; }" 
+                          onBlur="if(this.value == '') { this.value = 'Your Email...';}"
+                          value="Your Email..." required="">
+                        </fieldset>
+                      </div>
+                      <div class="col-md-5">
+                        <fieldset>
+                          <button type="submit" id="form-submit" class="button">Subscribe Now!</button>
+                        </fieldset>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>-->
+      <!-- Subscribe Form Ends Here -->
+  
+  
+      
+      <!-- Footer Starts Here -->
+      <div class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="logo">
+                <img src="../static/assets/images/CredTech-Logo.png" height="50cm" alt="">
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="footer-menu">
+                <ul>
+                  <li><a href="index">Home</a></li>
+                  <!-- <li><a href="#">Help</a></li>
+                  <li><a href="#">Privacy Policy</a></li> -->
+                  <li><a href="about">How It Works ?</a></li>
+                  <li><a href="mailto:lokarepurva121@gmail.com">Help</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="social-icons">
+                <ul>
+                  <li><a href="https://www.linkedin.com/in/siddhi-bhor-38aa7b1a5"><i class="fa fa-linkedin"></i></a></li>
+                  <li><a href="https://github.com/siddhibhor-56"><i class="fa fa-github"></i></a></li>
+                  <li><a href="mailto:lokarepurva121@gmail.com"><i class="fa fa-google"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer Ends Here -->
+  
+  
+  
+      <!-- Bootstrap core JavaScript -->
+      <script src="../static/vendor/jquery/jquery.min.js"></script>
+      <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+  
+      <!-- Additional Scripts -->
+      <script src="../static/assets/js/custom.js"></script>
+      <script src="../static/assets/js/owl.js"></script>
+  
+  
+      <script language = "text/Javascript"> 
+        cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+        function clearField(t){                   //declaring the array outside of the
+        if(! cleared[t.id]){                      // function makes it static and global
+            cleared[t.id] = 1;  // you could use true and false, but that's more typing
+            t.value='';         // with more chance of typos
+            t.style.color='#fff';
+            }
+        }
+      </script>
+  
+  
+    </body>
+  
+  </html>
+  
